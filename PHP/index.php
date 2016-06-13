@@ -5,7 +5,9 @@
 $authToken = 'INSERT AUTH TOKEN HERE'; // For test system
 
 // The order data to send to the API
-$postData = array( 'order' => array(
+$postData = array(
+  'pdf_label_paper_size' => 'A4',  // Use A4 for regular sheet paper and A6 for thermal print labels
+  'order' => array(
     'service' => 'DDP31',
     'bag' => 0,
     'pallet' => 0,

@@ -56,7 +56,10 @@ namespace ViaChina.NET
 				lineItem
 			};
 
-			string json = Newtonsoft.Json.JsonConvert.SerializeObject(new { order = order });
+			string json = Newtonsoft.Json.JsonConvert.SerializeObject(new {
+				pdf_label_paper_size = "A4", // Use A4 for regular sheet paper and A6 for thermal print labels
+				order = order
+			});
 
 			var client = new HttpClient ();
 			client.DefaultRequestHeaders.Add("Authorization", "Bearer " + authToken);

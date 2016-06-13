@@ -23,6 +23,7 @@ class Example {
             connection.connect();
 
             JsonObject order = Json.createObjectBuilder()
+                .add("pdf_label_paper_size", "A4") // Use A4 for regular sheet paper and A6 for thermal print labels
                 .add("order",  Json.createObjectBuilder()
                     .add("service", "DDP31")
                     .add("bag", 0)
