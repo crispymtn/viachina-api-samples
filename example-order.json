@@ -1,0 +1,38 @@
+{
+  "pdf_label_paper_size": "A6",
+  "order": {
+    "service": "DDP31",
+    "bag": 0,
+    "pallet": 0,
+    "client_reference": "74652018450211",
+    "insurance_cost_in_eur": 0,
+    "domestic_carrier": "DPD",
+    "address_attributes": {
+      "name": "John Doe",
+      "street1": "Example Street 235",
+      "street2": "",
+      "zip_code": "12345",
+      "town": "Exampletown",
+      "country_code": "DE",
+      "state_or_province": ""
+    },
+    "line_items_attributes": [
+      {
+        "original_description": "LED Bulb E27",
+        "kind": "gift",
+        "qty": "2",
+        "hs_code": "9634500000",
+        "weight": "0.02",
+        "price_in_eur": "40"
+      },
+      {
+        "original_description": "LED Bulb B22",
+        "kind": "gift",
+        "qty": "1",
+        "hs_code": "9634500000",
+        "weight": "0.20",
+        "price_in_eur": "2000"
+      }
+    ]
+  }
+}
