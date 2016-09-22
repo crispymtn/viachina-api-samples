@@ -51,16 +51,19 @@
                         <div class="wy-nav-content">
                 <div class="rst-content">
                     <div role="main" class="document">
-                        <p>This document will tell you how to use the ViaEurope API, in order to create orders and receive labels for your orders.</p>
-<p><strong>You will need an authentication token to get started.</strong></p>
+                        <p>This document will tell you how to use the ViaEurope API, in order to create
+orders and receive labels for your orders.</p>
+<p><strong>You will need an API key from ViaEurope to get started.</strong></p>
 <p>Your requests must go to:
 <code>http://app-sandbox.viaeurope.com/api/v1/orders</code></p>
 <p>Your requests must include the following headers:</p>
-<pre><code>Authorization: Token token="&lt;YOUR TOKEN HERE&gt;"
+<pre><code>Authorization: Token token="INSERT YOUR API KEY HERE"
 Content-Type: application/json
 Accept: application/json</code></pre>
+<p>If you send no Authorization header or the wrong token, you will receive a <code>401 Unauthorized</code> response.</p>
 <h1 id="creating-your-first-order">Creating your first order</h1>
-<p>Send this example JSON to <code>http://app-sandbox.viaeurope.com/api/v1/orders</code></p>
+<p>Send this example JSON via POST request to
+<code>http://app-sandbox.viaeurope.com/api/v1/orders</code></p>
 <pre><code>{
   "order": {
     "bag_number": "Bag 1",
@@ -105,19 +108,19 @@ Accept: application/json</code></pre>
 <p>You will receive a response like this:</p>
 <pre><code>{
     "client_reference": "74644043909723",
-    "hawb": null,
-    "id": 88,
+    "reference": "VEOR3E70760A"
     "labels": [
         {
             "parcel_number": "1",
-            "pdf": "&lt;base64 data&gt;",
+            "pdf": "http://...",
             "tracking_code": "09988540036769"
         }
     ],
+    "hawb": null,
     "mawb": null,
-    "reference": "VEOR3E70760A"
 }</code></pre>
-<p>You can inspect the <code>pdf</code> field of every object under <code>labels</code> to get a base64-encoded PDF of your order's labels.</p>
+<p>You can inspect the <code>pdf</code> field of every object under <code>labels</code> to get a download
+link to your order's labels. </p>
                     </div>
 
                     <footer>

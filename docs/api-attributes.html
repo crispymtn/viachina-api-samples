@@ -57,6 +57,7 @@
 <tr>
 <th>Attribute</th>
 <th>Required?</th>
+<th>Type</th>
 <th>Description</th>
 <th>Example</th>
 </tr>
@@ -65,20 +66,23 @@
 <tr>
 <td><code>client_reference</code></td>
 <td>required</td>
+<td>String</td>
 <td>Your unique reference for the order</td>
-<td><code>ABCDEFG123456</code>, <code>HK_DPD_2342</code></td>
+<td><code>"ABCDEFG123456"</code>, <code>"HK_DPD_2342"</code></td>
 </tr>
 <tr>
 <td><code>bag_number</code></td>
 <td>optional</td>
+<td>String</td>
 <td>The bag identifier for this order</td>
-<td><code>1</code>, <code>15-A</code></td>
+<td><code>"1"</code>, <code>"15-A"</code></td>
 </tr>
 <tr>
 <td><code>disposition</code></td>
 <td>required</td>
+<td>String</td>
 <td>Can either be <code>stock</code> or <code>sale</code></td>
-<td><code>stock</code>, <code>sale</code></td>
+<td><code>"stock"</code>, <code>"sale"</code></td>
 </tr>
 <tr>
 <td><code>line_items</code></td>
@@ -99,6 +103,7 @@
 <tr>
 <th>Attribute</th>
 <th>Required?</th>
+<th>Type</th>
 <th>Description</th>
 <th>Example</th>
 </tr>
@@ -107,44 +112,51 @@
 <tr>
 <td><code>qty</code></td>
 <td>required</td>
+<td>Integer</td>
 <td>Quantity of items</td>
 <td><code>1</code>, <code>2</code>, <code>426</code></td>
 </tr>
 <tr>
 <td><code>price</code></td>
 <td>required</td>
+<td>Integer</td>
 <td>The price of ONE item in cents</td>
 <td><code>12</code> for 12 cents, <code>123</code> for 1.23€</td>
 </tr>
 <tr>
 <td><code>weight</code></td>
 <td>required</td>
+<td>Integer</td>
 <td>The weight of ONE item in grams</td>
 <td><code>12</code> for 12 grams, <code>1200</code> for 1.2 kg</td>
 </tr>
 <tr>
 <td><code>parcel_number</code></td>
 <td>required</td>
+<td>Integer</td>
 <td>The parcel, which the item is in</td>
 <td><code>1</code>, <code>2</code>, must be consecutive numbers starting at 1</td>
 </tr>
 <tr>
 <td><code>taric_code</code></td>
 <td>required</td>
+<td>String</td>
 <td>The TARIC code (10 digits) for this item</td>
-<td><code>8487905910</code></td>
+<td><code>"8487905910"</code></td>
 </tr>
 <tr>
 <td><code>ecommerce_url</code></td>
 <td>optional</td>
+<td>String</td>
 <td>An URL where this item can be found on the internet</td>
-<td><code>http://example.org/shop/products/1234</code></td>
+<td><code>"http://example.org/shop/products/1234"</code></td>
 </tr>
 <tr>
 <td><code>ecommerce_reference</code></td>
 <td>optional</td>
+<td>String</td>
 <td>A product reference from your ecommerce system</td>
-<td><code>1234</code></td>
+<td><code>"1234"</code></td>
 </tr>
 </tbody>
 </table>
@@ -155,6 +167,7 @@
 <tr>
 <th>Attribute</th>
 <th>Required?</th>
+<th>Type</th>
 <th>Description</th>
 <th>Example</th>
 </tr>
@@ -163,62 +176,72 @@
 <tr>
 <td><code>courier_name</code></td>
 <td>required</td>
+<td>String</td>
 <td>Courier you want to ship the order with</td>
-<td><code>DPD</code>, <code>DHL</code>, <code>UPS</code>, <code>PostNL</code></td>
+<td><code>"DPD"</code>, <code>"DHL"</code>, <code>"UPS"</code>, <code>"PostNL"</code></td>
 </tr>
 <tr>
 <td><code>courier_service</code></td>
 <td>required</td>
+<td>String</td>
 <td>Service to use</td>
-<td><code>DDP31</code>, <code>DDP2</code>, <code>DDU</code></td>
+<td><code>"DDP31"</code>, <code>"DDP2"</code>, <code>"DDU"</code></td>
 </tr>
 <tr>
 <td><code>registered</code></td>
 <td>required</td>
+<td>Boolean</td>
 <td>Track order?</td>
 <td><code>true</code> or <code>false</code></td>
 </tr>
 <tr>
 <td><code>name</code></td>
 <td>required</td>
+<td>String</td>
 <td>Customer name</td>
-<td><code>John Doe</code></td>
+<td><code>"John Doe"</code></td>
 </tr>
 <tr>
 <td><code>company</code></td>
 <td>optional</td>
+<td>String</td>
 <td>Customer's company name</td>
-<td><code>John Doe Ltd.</code></td>
+<td><code>"John Doe Ltd."</code></td>
 </tr>
 <tr>
 <td><code>street</code></td>
 <td>required</td>
+<td>String</td>
 <td>Customer's street address</td>
-<td><code>Example Street 42</code></td>
+<td><code>"Example Street 42"</code></td>
 </tr>
 <tr>
 <td><code>zip_code</code></td>
 <td>required</td>
+<td>String</td>
 <td>Customer's zip code</td>
-<td><code>12345</code></td>
+<td><code>"12345"</code></td>
 </tr>
 <tr>
 <td><code>city</code></td>
 <td>required</td>
+<td>String</td>
 <td>Customer's city</td>
-<td><code>Example City</code></td>
+<td><code>"Example City"</code></td>
 </tr>
 <tr>
 <td><code>country_code</code></td>
 <td>required</td>
+<td>String</td>
 <td>Customer's country as <a href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a> code</td>
-<td><code>DE</code>, <code>GB</code>, <code>NL</code></td>
+<td><code>"DE"</code>, <code>"GB"</code>, <code>"NL"</code></td>
 </tr>
 <tr>
 <td><code>phone</code></td>
 <td></td>
+<td>String</td>
 <td>Customer's phone number. Required for UPS shipment.</td>
-<td><code>+31477234929</code></td>
+<td><code>"+31477234929"</code></td>
 </tr>
 </tbody>
 </table>
