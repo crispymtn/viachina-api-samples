@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ViaEurope API Access</title>
+
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic'
+          rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="http://username.github.io/project/css/theme.css" type="text/css"/>
+    <link rel="stylesheet" href="http://username.github.io/project/css/theme-fixes.css" type="text/css"/>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css">
+</head>
+<body class="wy-body-for-nav">
+
+    <div class="wy-grid-for-nav">
+
+        <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+            <div class="wy-side-nav-search">
+                <a href="http://username.github.io/project/" class="fa fa-home"> ViaEurope API Access</a>
+            </div>
+
+            <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                                            <li class="toctree-l1 ">
+                            <a class="reference internal "
+                               href="http://username.github.io/project/docs/api-tutorial.html">
+                                API Tutorial
+                            </a>
+                        </li>
+                                            <li class="toctree-l1 ">
+                            <a class="reference internal "
+                               href="http://username.github.io/project/docs/api-attributes.html">
+                                API Attribute Documentation
+                            </a>
+                        </li>
+                                    </ul>
+            </div>
+            &nbsp;
+        </nav>
+
+        <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+                        <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+                <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+                <a href="http://username.github.io/project/">ViaEurope API Access</a>
+            </nav>
+
+
+                        <div class="wy-nav-content">
+                <div class="rst-content">
+                    <div role="main" class="document">
+                        <h3 id="order-attributes">Order attributes</h3>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Required?</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>client_reference</code></td>
+<td>required</td>
+<td>Your unique reference for the order</td>
+<td><code>ABCDEFG123456</code>, <code>HK_DPD_2342</code></td>
+</tr>
+<tr>
+<td><code>bag_number</code></td>
+<td>optional</td>
+<td>The bag identifier for this order</td>
+<td><code>1</code>, <code>15-A</code></td>
+</tr>
+<tr>
+<td><code>disposition</code></td>
+<td>required</td>
+<td>Can either be <code>stock</code> or <code>sale</code></td>
+<td><code>stock</code>, <code>sale</code></td>
+</tr>
+<tr>
+<td><code>line_items</code></td>
+<td>required</td>
+<td>An array of line items for this order</td>
+</tr>
+<tr>
+<td><code>delivery</code></td>
+<td>required</td>
+<td>The delivery information for this order</td>
+</tr>
+</tbody>
+</table>
+<p>   </p>
+<h3 id="line-item-attributes">Line item attributes</h3>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Required?</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>qty</code></td>
+<td>required</td>
+<td>Quantity of items</td>
+<td><code>1</code>, <code>2</code>, <code>426</code></td>
+</tr>
+<tr>
+<td><code>price</code></td>
+<td>required</td>
+<td>The price of ONE item in cents</td>
+<td><code>12</code> for 12 cents, <code>123</code> for 1.23€</td>
+</tr>
+<tr>
+<td><code>weight</code></td>
+<td>required</td>
+<td>The weight of ONE item in grams</td>
+<td><code>12</code> for 12 grams, <code>1200</code> for 1.2 kg</td>
+</tr>
+<tr>
+<td><code>parcel_number</code></td>
+<td>required</td>
+<td>The parcel, which the item is in</td>
+<td><code>1</code>, <code>2</code>, must be consecutive numbers starting at 1</td>
+</tr>
+<tr>
+<td><code>taric_code</code></td>
+<td>required</td>
+<td>The TARIC code (10 digits) for this item</td>
+<td><code>8487905910</code></td>
+</tr>
+<tr>
+<td><code>ecommerce_url</code></td>
+<td>optional</td>
+<td>An URL where this item can be found on the internet</td>
+<td><code>http://example.org/shop/products/1234</code></td>
+</tr>
+<tr>
+<td><code>ecommerce_reference</code></td>
+<td>optional</td>
+<td>A product reference from your ecommerce system</td>
+<td><code>1234</code></td>
+</tr>
+</tbody>
+</table>
+<p>   </p>
+<h3 id="delivery-attributes">Delivery attributes</h3>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Required?</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>courier_name</code></td>
+<td>required</td>
+<td>Courier you want to ship the order with</td>
+<td><code>DPD</code>, <code>DHL</code>, <code>UPS</code>, <code>PostNL</code></td>
+</tr>
+<tr>
+<td><code>courier_service</code></td>
+<td>required</td>
+<td>Service to use</td>
+<td><code>DDP31</code>, <code>DDP2</code>, <code>DDU</code></td>
+</tr>
+<tr>
+<td><code>registered</code></td>
+<td>required</td>
+<td>Track order?</td>
+<td><code>true</code> or <code>false</code></td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>required</td>
+<td>Customer name</td>
+<td><code>John Doe</code></td>
+</tr>
+<tr>
+<td><code>company</code></td>
+<td>optional</td>
+<td>Customer's company name</td>
+<td><code>John Doe Ltd.</code></td>
+</tr>
+<tr>
+<td><code>street</code></td>
+<td>required</td>
+<td>Customer's street address</td>
+<td><code>Example Street 42</code></td>
+</tr>
+<tr>
+<td><code>zip_code</code></td>
+<td>required</td>
+<td>Customer's zip code</td>
+<td><code>12345</code></td>
+</tr>
+<tr>
+<td><code>city</code></td>
+<td>required</td>
+<td>Customer's city</td>
+<td><code>Example City</code></td>
+</tr>
+<tr>
+<td><code>country_code</code></td>
+<td>required</td>
+<td>Customer's country as <a href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a> code</td>
+<td><code>DE</code>, <code>GB</code>, <code>NL</code></td>
+</tr>
+<tr>
+<td><code>phone</code></td>
+<td></td>
+<td>Customer's phone number. Required for UPS shipment.</td>
+<td><code>+31477234929</code></td>
+</tr>
+</tbody>
+</table>
+                    </div>
+
+                    <footer>
+                        <hr/>
+                                                    <div role="contentinfo">
+                                <p>
+                                    Find ViaEurope API Access on <a href="https://github.com/crispymtn/viaeurope-api-samples">GitHub</a>.
+                                </p>
+                            </div>
+                                                Built with <a href="http://couscous.io/">Couscous</a> using a <a href="https://github.com/CouscousPHP/Template-ReadTheDocs">theme</a> based on <a href="https://readthedocs.org/">Read the Docs</a>.
+                    </footer>
+
+                </div>
+            </div>
+
+        </section>
+
+    </div>
+
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+    <script src="http://username.github.io/project/js/theme.js"></script>
+
+    <script>
+        $(function() {
+            // Syntax highlighting
+            hljs.initHighlightingOnLoad();
+        });
+    </script>
+
+</body>
+</html>
