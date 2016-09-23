@@ -2,7 +2,9 @@
 
 Attribute | Required? | Type | Description | Example
 ------------- | ------------- | ------------- | -------------
-`client_reference` | required | String |  Your unique reference for the order | `"ABCDEFG123456"`, `"HK_DPD_2342"`
+`client_reference` | required | String | Your unique reference for the order | `"ABCDEFG123456"`, `"HK_DPD_2342"`
+`hawb` | optional | String | HAWB number for this order. Can be added later. | `"HK_DPD_12345"`, `"12345-EXAMPLE"`
+`mawb` | optional | String | MAWB number for this order. Can be added later. | `"123-12345675"`, `"160-63698552"`
 `bag_number` | optional | String | The bag identifier for this order | `"1"`, `"15-A"`
 `disposition` | required | String | Can either be `stock` or `sale` | `"stock"`, `"sale"`
 `line_items` | required | An array of line items for this order | 

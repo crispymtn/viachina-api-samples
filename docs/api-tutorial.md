@@ -1,10 +1,21 @@
 This document will tell you how to use the ViaEurope API, in order to create 
 orders and receive labels for your orders.
 
+# Setup 
+
 **You will need an API key from ViaEurope to get started.**
 
-Your requests must go to:
-`http://app-sandbox.viaeurope.com/api/v1/orders`
+### Endpoints 
+
+Your requests for testing our API must go to
+`http://app-sandbox.viaeurope.com/api/v1/`
+
+When you're ready to proceed with using the API, you can direct your
+requests to `http://app.viaeurope.com/api/v1/`
+
+Note that these two endpoints will require _different API keys_.
+
+### Authorization & Headers
 
 Your requests must include the following headers:
 ```
@@ -15,6 +26,7 @@ Accept: application/json
 
 If you send no Authorization header or the wrong token, you will receive a `401
 Unauthorized` response.
+
 
 # Creating your first order
 
@@ -27,6 +39,8 @@ Send this example JSON via POST request to
     "bag_number": "Bag 1",
     "client_reference": "74644043909723",
     "disposition": "sale",
+    "hawb": "12345-EXAMPLE",
+    "mawb": "123-12345675",
     "line_items": [
       {
         "description": "UV Lamp",
@@ -65,7 +79,10 @@ Send this example JSON via POST request to
 }
 ```
 
-You will receive a response like this:
+If your request was successful, you will receive a `201 Created` response. 
+Otherwise there will be a `422 Unprocessable Entity` response with an `errors`
+JSON explaining what went wrong. You will also receive the created order as
+JSON:
 
 ```
 {
@@ -78,10 +95,73 @@ You will receive a response like this:
             "tracking_code": "09988540036769"
         }
     ],
-    "hawb": null,
-    "mawb": null,
+    "hawb": "12345-EXAMPLE",
+    "mawb": "123-12345675"
 }
 ```
 
 You can inspect the `pdf` field of every object under `labels` to get a download
 link to your order's labels. 
+
+# Assigning HAWB and MAWB to an order
+
+If you don't know HAWB and MAWB at the time you create the order, it is possible
+to assign these two at a later date by doing an update.
+
+Send the following example JSON via PUT request to 
+`http://app-sandbox.viaeurope.com/api/v1/orders/ORDER_CLIENT_REFERENCE`. Be sure
+to replace `ORDER_CLIENT_REFERENCE` in the above URL with your reference for 
+this order. In the example above, it would be `74644043909723`, so the request 
+would go to `http://app-sandbox.viaeurope.com/api/v1/orders/74644043909723`.
+
+Example JSON update to order, assigning HAWB and MAWB:
+
+```
+{
+  "order": {
+    "hawb": "12345-EXAMPLE",
+    "mawb": "123-12345675"
+  }
+}
+```
+
+If your request was successful, you will receive a `204 No Content` response. 
+Otherwise there will be a `422 Unprocessable Entity` response with an `errors`
+JSON explaining what went wrong.
+
+
+# Marking an HAWB as "ready to ship"
+
+When you've created all orders belonging to a HAWB, and when you're ready to 
+ship that HAWB, you can mark it as "ready" by updating its volumetric weight
+and its number of units to their correct values. That way, we will know that
+you're now ready to ship an HAWB.
+
+Send the following example JSON via PUT request to 
+`http://app-sandbox.viaeurope.com/api/v1/hawbs/HAWB_NUMBER`. Be sure
+to replace `HAWB_NUMBER` in the above URL with the HAWB number you want to
+update. In the example above, it would be `12345-EXAMPLE`, so the request 
+would go to `http://app-sandbox.viaeurope.com/api/v1/orders/12345-EXAMPLE`.
+
+Example JSON update to HAWB: 
+
+```
+{
+  "hawb": {
+    "volumetric_weight": "1224",
+    "number_of_units": "17"
+  }
+}
+```
+
+This would update the HAWB information to reflect a volumetric weight of 1224 
+kg and 17 units (parcels/boxes/bags).
+
+If your request was successful, you will receive a `204 No Content` response. 
+Otherwise there will be a `422 Unprocessable Entity` response with an `errors`
+JSON explaining what went wrong.
+
+Careful: after issuing this request, we will assume you are finished with
+assigning orders to this HAWB and will proceed with announcing it to our
+partners. You cannot add any additional orders to it after this step.
+
