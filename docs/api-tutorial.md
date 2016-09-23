@@ -1,5 +1,4 @@
 This document will tell you how to use the ViaEurope API, in order to receive labels, create orders and send your shipments.
-
 There are 3 step:
 1. Create Order and receive Label
 2. Set MAWB and HAWB
