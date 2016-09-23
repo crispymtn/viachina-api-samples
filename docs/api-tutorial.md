@@ -1,5 +1,11 @@
-This document will tell you how to use the ViaEurope API, in order to create 
-orders and receive labels for your orders.
+This document will tell you how to use the ViaEurope API, in order to receive labels, create orders and send your shipments.
+
+There are 3 step:
+1. Create Order and receive Label
+2. Set MAWB and HAWB
+3. Update Shipment as 'Ready to Ship"
+
+You can skip step 2 if you already have the MAWB and HABW data available when creating the order.
 
 # Setup 
 
@@ -28,7 +34,7 @@ If you send no Authorization header or the wrong token, you will receive a `401
 Unauthorized` response.
 
 
-# Creating your first order
+# 1. Creating an order and receive Label
 
 Send this example JSON via POST request to 
 `http://app-sandbox.viaeurope.com/api/v1/orders`
@@ -103,10 +109,12 @@ JSON:
 You can inspect the `pdf` field of every object under `labels` to get a download
 link to your order's labels. 
 
-# Assigning HAWB and MAWB to an order
+# 2. Assigning HAWB and MAWB to an order
 
 If you don't know HAWB and MAWB at the time you create the order, it is possible
 to assign these two at a later date by doing an update.
+
+If you don't have an HAWB, use the MAWB for both the HAWB and MAWB field.
 
 Send the following example JSON via PUT request to 
 `http://app-sandbox.viaeurope.com/api/v1/orders/ORDER_CLIENT_REFERENCE`. Be sure
@@ -130,11 +138,11 @@ Otherwise there will be a `422 Unprocessable Entity` response with an `errors`
 JSON explaining what went wrong.
 
 
-# Marking an HAWB as "ready to ship"
+# 3. Set Shipment as "ready to ship"
 
 When you've created all orders belonging to a HAWB, and when you're ready to 
 ship that HAWB, you can mark it as "ready" by updating its volumetric weight
-and its number of units to their correct values. That way, we will know that
+and its number of Carton boxes to their correct values. That way, we will know that
 you're now ready to ship an HAWB.
 
 Send the following example JSON via PUT request to 
@@ -155,7 +163,7 @@ Example JSON update to HAWB:
 ```
 
 This would update the HAWB information to reflect a volumetric weight of 1224 
-kg and 17 units (parcels/boxes/bags).
+kg and 17 Carton Boxes / Units.
 
 If your request was successful, you will receive a `204 No Content` response. 
 Otherwise there will be a `422 Unprocessable Entity` response with an `errors`
