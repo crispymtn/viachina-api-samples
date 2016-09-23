@@ -3,6 +3,7 @@ template:
 
 # Base URL of the published website
 baseUrl: http://developer.viaeurope.com
+cname: developer.viaeurope.com
 
 # Used to link to the GitHub project
 github:
