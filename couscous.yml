@@ -18,6 +18,9 @@ menu:
     home:
       text: API Tutorial
       relativeUrl: docs/api-tutorial.html 
+    test:
+      text: API Test
+      relativeUrl: docs/api-tutorial.html 
     foo:
       text: API Attribute Documentation
       relativeUrl: docs/api-attributes.html 
