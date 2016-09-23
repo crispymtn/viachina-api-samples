@@ -53,9 +53,15 @@
                     <div role="main" class="document">
                         <p>This document will tell you how to use the ViaEurope API, in order to create
 orders and receive labels for your orders.</p>
+<h1 id="setup">Setup</h1>
 <p><strong>You will need an API key from ViaEurope to get started.</strong></p>
-<p>Your requests must go to:
-<code>http://app-sandbox.viaeurope.com/api/v1/orders</code></p>
+<h3 id="endpoints">Endpoints</h3>
+<p>Your requests for testing our API must go to
+<code>http://app-sandbox.viaeurope.com/api/v1/</code></p>
+<p>When you're ready to proceed with using the API, you can direct your
+requests to <code>http://app.viaeurope.com/api/v1/</code></p>
+<p>Note that these two endpoints will require <em>different API keys</em>.</p>
+<h3 id="authorization-amp-headers">Authorization &amp; Headers</h3>
 <p>Your requests must include the following headers:</p>
 <pre><code>Authorization: Token token="INSERT YOUR API KEY HERE"
 Content-Type: application/json
@@ -69,6 +75,8 @@ Accept: application/json</code></pre>
     "bag_number": "Bag 1",
     "client_reference": "74644043909723",
     "disposition": "sale",
+    "hawb": "12345-EXAMPLE",
+    "mawb": "123-12345675",
     "line_items": [
       {
         "description": "UV Lamp",
@@ -105,7 +113,10 @@ Accept: application/json</code></pre>
     }
   }
 }</code></pre>
-<p>You will receive a response like this:</p>
+<p>If your request was successful, you will receive a <code>201 Created</code> response.
+Otherwise there will be a <code>422 Unprocessable Entity</code> response with an <code>errors</code>
+JSON explaining what went wrong. You will also receive the created order as
+JSON:</p>
 <pre><code>{
     "client_reference": "74644043909723",
     "reference": "VEOR3E70760A"
@@ -116,11 +127,54 @@ Accept: application/json</code></pre>
             "tracking_code": "09988540036769"
         }
     ],
-    "hawb": null,
-    "mawb": null,
+    "hawb": "12345-EXAMPLE",
+    "mawb": "123-12345675"
 }</code></pre>
 <p>You can inspect the <code>pdf</code> field of every object under <code>labels</code> to get a download
 link to your order's labels. </p>
+<h1 id="assigning-hawb-and-mawb-to-an-order">Assigning HAWB and MAWB to an order</h1>
+<p>If you don't know HAWB and MAWB at the time you create the order, it is possible
+to assign these two at a later date by doing an update.</p>
+<p>Send the following example JSON via PUT request to
+<code>http://app-sandbox.viaeurope.com/api/v1/orders/ORDER_CLIENT_REFERENCE</code>. Be sure
+to replace <code>ORDER_CLIENT_REFERENCE</code> in the above URL with your reference for
+this order. In the example above, it would be <code>74644043909723</code>, so the request
+would go to <code>http://app-sandbox.viaeurope.com/api/v1/orders/74644043909723</code>.</p>
+<p>Example JSON update to order, assigning HAWB and MAWB:</p>
+<pre><code>{
+  "order": {
+    "hawb": "12345-EXAMPLE",
+    "mawb": "123-12345675"
+  }
+}</code></pre>
+<p>If your request was successful, you will receive a <code>204 No Content</code> response.
+Otherwise there will be a <code>422 Unprocessable Entity</code> response with an <code>errors</code>
+JSON explaining what went wrong.</p>
+<h1 id="marking-an-hawb-as-quotready-to-shipquot">Marking an HAWB as &quot;ready to ship&quot;</h1>
+<p>When you've created all orders belonging to a HAWB, and when you're ready to
+ship that HAWB, you can mark it as &quot;ready&quot; by updating its volumetric weight
+and its number of units to their correct values. That way, we will know that
+you're now ready to ship an HAWB.</p>
+<p>Send the following example JSON via PUT request to
+<code>http://app-sandbox.viaeurope.com/api/v1/hawbs/HAWB_NUMBER</code>. Be sure
+to replace <code>HAWB_NUMBER</code> in the above URL with the HAWB number you want to
+update. In the example above, it would be <code>12345-EXAMPLE</code>, so the request
+would go to <code>http://app-sandbox.viaeurope.com/api/v1/orders/12345-EXAMPLE</code>.</p>
+<p>Example JSON update to HAWB: </p>
+<pre><code>{
+  "hawb": {
+    "volumetric_weight": "1224",
+    "number_of_units": "17"
+  }
+}</code></pre>
+<p>This would update the HAWB information to reflect a volumetric weight of 1224
+kg and 17 units (parcels/boxes/bags).</p>
+<p>If your request was successful, you will receive a <code>204 No Content</code> response.
+Otherwise there will be a <code>422 Unprocessable Entity</code> response with an <code>errors</code>
+JSON explaining what went wrong.</p>
+<p>Careful: after issuing this request, we will assume you are finished with
+assigning orders to this HAWB and will proceed with announcing it to our
+partners. You cannot add any additional orders to it after this step.</p>
                     </div>
 
                     <footer>
