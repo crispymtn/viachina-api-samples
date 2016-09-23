@@ -21,3 +21,6 @@ menu:
     foo:
       text: API Attribute Documentation
       relativeUrl: docs/api-attributes.html 
+    foo:
+      text: Test
+      relativeUrl: docs/test.html 
