@@ -1,0 +1,23 @@
+template:
+  url: https://github.com/CouscousPHP/Template-ReadTheDocs
+
+# Base URL of the published website
+baseUrl: http://developer.viaeurope.com
+
+# Used to link to the GitHub project
+github:
+  user: crispymtn 
+  repo: viaeurope-api-samples
+
+title: ViaEurope Developer Documentation 
+subTitle: Gain access to over one billion customers
+
+# The left menu bar
+menu:
+  items:
+    home:
+      text: API Tutorial
+      relativeUrl: docs/api-tutorial.html 
+    foo:
+      text: API Attribute Documentation
+      relativeUrl: docs/api-attributes.html 
