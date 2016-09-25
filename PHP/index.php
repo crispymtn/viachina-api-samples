@@ -1,48 +1,51 @@
 <?php
 
+// --- For Sandbox Testing ---
+$authToken = 'INSERT SANDBOX AUTH TOKEN HERE';
+$url = 'https://app-sandbox.viaeurope.com/api/v1/orders';
 
-// Your API token
-$authToken = 'INSERT AUTH TOKEN HERE'; // For test system
+// --- For Production System ---
+// $authToken = 'INSERT PRODUCTION AUTH TOKEN HERE';
+// $url = 'http://app.viaeurope.com/api/v1/orders';
 
 // The order data to send to the API
 $postData = array(
-  'pdf_label_paper_size' => 'A4',  // Use A4 for regular sheet paper and A6 for thermal print labels
   'order' => array(
-    'service' => 'DDP31',
-    'bag' => 0,
-    'pallet' => 0,
     'client_reference' => 'QA0200602190010',
-    'domestic_carrier' => 'DPD',
-    'address_attributes' => array(
-      'name' => 'John Doe',
-      'street1' => "Example Street 59",
-      'zip_code' => '12345',
-      'town' => 'Exampleton',
-      'country_code' => 'DE'
-    ),
-    'line_items_attributes' => array(
-      array(
-        'original_description' => 'Car Airbed',
-        'kind' => 0,
-        'hs_code' => '9949909043',
-        'price_in_eur' => '2000', // Eurocents, so 2000 Eurocents = 20.00 Euro
-        'qty' => '1',
-        'weight' => '0.20'
-      )
+    'disposition' => 'sale',
+  'delivery' => array(
+    'courier_service' => 'DDP31',
+    'courier' => 'DPD', // You can use DPD, UPS or DHL
+    'registered' => true,
+    'name' => 'John Doe',
+    'street' => 'Example Street 59',
+    'zip_code' => '12345',
+    'city' => 'Exampleton',
+    'country_code' => 'DE',
+    'phone' => '+000000000000' // UPS requires a phone number
+  ),
+  'line_items' => array(
+    array(
+      'description' => 'Car Airbed',
+      'taric_code' => '9949909043',
+      'price' => '2000', // In cents, so 2000 cents = 20.00 Euros
+      'qty' => '1',
+      'weight' => '200', // In grams, so 200 = 0.2 kilos
+      'parcel_number' => 1
     )
+  )
 ));
 
 // Setup cURL
-$request = curl_init('http://api.staging.viachina.com/v1/orders'); // For test system
-// $request = curl_init('http://api.viachina.com/v1/orders'); // For production system
-
+$request = curl_init($url);
 
 curl_setopt_array($request, array(
     CURLOPT_POST => TRUE,
     CURLOPT_RETURNTRANSFER => TRUE,
     CURLOPT_HTTPHEADER => array(
-        'Authorization: Bearer '.$authToken,
-        'Content-Type: application/json'
+        'Authorization: Token token="'.$authToken.'"',
+        'Content-Type: application/json',
+        'Accept: application/json'
     ),
     CURLOPT_POSTFIELDS => json_encode($postData)
 ));
@@ -71,19 +74,9 @@ $responseData = json_decode($response, TRUE);
 curl_close($request);
 
 // Get the PDF label data from the response (it is base64 encoded)
-$encoded_pdf_label_data = $responseData['pdf_label_data'];
-
-// Decode the PDF label data
-$pdf_label_data = base64_decode($encoded_pdf_label_data);
-
-// Send out headers to show PDF in browser
-header('Content-type: application/pdf');
-header('Content-Disposition: inline; filename=label.pdf');
-header('Content-Transfer-Encoding: binary');
-header('Content-Length: ' . mb_strlen($pdf_label_data));
-header('Accept-Ranges: bytes');
+$label_url = $responseData['labels'][0]['pdf_url'];
 
 // Print raw PDF data for browser
-echo $pdf_label_data
+echo "Label received: ".$label_url
 
 ?>
