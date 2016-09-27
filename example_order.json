@@ -1,0 +1,27 @@
+{
+  "order": {
+    "client_reference": "74644043909723",
+    "disposition": "sale",
+    "line_items": [
+      {
+        "description": "plastics key ring",
+        "qty": 2,
+        "weight": 400,
+        "price": 25,
+        "parcel_number": 1,
+        "taric_code": "8487905910"
+      }
+    ],
+    "delivery": {
+      "courier": "DPD",
+      "courier_service": "DDP31",
+      "registered": true,
+      "name": "John Doe",
+      "street": "Example Street 42",
+      "zip_code": "12345",
+      "city": "Example Town",
+      "country_code": "DE",
+      "phone": "+4916012345678"
+    }
+  }
+}
