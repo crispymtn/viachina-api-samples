@@ -4,12 +4,12 @@ using System.Runtime.CompilerServices;
 // Information about this assembly is defined by the following attributes.
 // Change them to the values specific to your project.
 
-[assembly: AssemblyTitle ("ViaChina.NET")]
+[assembly: AssemblyTitle ("ViaEurope.NET")]
 [assembly: AssemblyDescription ("")]
 [assembly: AssemblyConfiguration ("")]
 [assembly: AssemblyCompany ("")]
 [assembly: AssemblyProduct ("")]
-[assembly: AssemblyCopyright ("(c) 2016 ViaChina")]
+[assembly: AssemblyCopyright ("(c) 2016 ViaEurope")]
 [assembly: AssemblyTrademark ("")]
 [assembly: AssemblyCulture ("")]
 

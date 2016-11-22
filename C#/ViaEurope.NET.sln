@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViaChina.NET", "ViaChina.NET\ViaChina.NET.csproj", "{DD3B7F3A-F907-4A3C-A012-E28572F3A097}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViaEurope.NET", "ViaEurope.NET\ViaEurope.NET.csproj", "{DD3B7F3A-F907-4A3C-A012-E28572F3A097}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
